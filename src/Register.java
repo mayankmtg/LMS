@@ -1,3 +1,11 @@
+
+//import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,7 +37,6 @@ public class Register extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
@@ -62,21 +69,15 @@ public class Register extends javax.swing.JFrame {
         jLabel6.setText("Name");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(38, 38, 38));
-        jTextField1.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 250, -1));
-
         jTextField3.setBackground(new java.awt.Color(38, 38, 38));
         jTextField3.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(255, 255, 255));
         jTextField3.setBorder(null);
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 250, -1));
 
         jTextField4.setBackground(new java.awt.Color(38, 38, 38));
@@ -105,6 +106,11 @@ public class Register extends javax.swing.JFrame {
         jTextField6.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(255, 255, 255));
         jTextField6.setBorder(null);
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 250, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 255, 0));
@@ -185,10 +191,6 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
@@ -197,9 +199,43 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    @SuppressWarnings("empty-statement")
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try
+     {
+         String name=jTextField4.getText();
+         int date=Integer.parseInt(jTextField6.getText());
+         String branch=jTextField3.getText();
+         int age=Integer.parseInt(jTextField5.getText());
+         
+         Class.forName("com.mysql.jdbc.Driver");
+         Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
+         Statement stmt=con.createStatement();
+
+         //String name="Jerome Dcruz";
+         //String contactno="9773523568";
+         String insert=new String();
+         insert="INSERT INTO students VALUES(null,'"+ name +"',"+date+",'"+branch+"',"+age+");";
+         stmt.executeUpdate(insert);
+         JOptionPane.showMessageDialog(null, "Done" ,"Success", 1);
+
+
+     }
+     catch(Exception e)
+     {
+         JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+
+     }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +287,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
