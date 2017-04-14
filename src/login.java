@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +20,9 @@ public class login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */
+    static String userName;
+    static String Type;
+    
     public login() {
         initComponents();
     }
@@ -47,7 +57,7 @@ public class login extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\NetBeansProjects\\LMS\\images\\libraries.jpg")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("/home/mayank/NetBeansProjects/LMS/images/libraries.jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -88,10 +98,20 @@ public class login extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 204, 163));
         jButton1.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(102, 0, 75));
         jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Register");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(89, 89, 89));
         jLabel3.setText("Start your experience");
@@ -159,6 +179,44 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new Register().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String uName=new String(jTextField2.getText());
+        String pWord=new String(jPasswordField1.getPassword());
+        ResultSet rs=null; 
+        String g;
+
+        try{ 
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","mayank");
+            Statement stmt=con.createStatement();
+            String sql="select password from login where userName='"+uName+"';";
+            rs=stmt.executeQuery(sql); rs.next();
+            String Pword=rs.getString("Password");
+            rs.close(); stmt.close(); con.close();
+            if(p.equals(Pword)){
+                g=jOptionPane1.showInputDialog(null,"Enter The Greatness Code");
+                String h;
+                h=g.toLowerCase();
+                if (h.equals("mayankthegreat")) {
+                    tryform t= new tryform();
+                    t.setVisible(true);
+                    this.setVisible(false);
+                } 
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Invalid User");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"error in connectivity"); 
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -93,7 +93,6 @@ public class launchClass extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
         jLabel2.setText("Management System");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\NetBeansProjects\\LMS\\images\\logonew.png")); // NOI18N
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
