@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author mayank
  */
-public class logDetails extends javax.swing.JFrame {
+public class fineCalc extends javax.swing.JFrame {
 
     /**
-     * Creates new form logDetails
+     * Creates new form fineCalc
      */
-    public logDetails() {
+    public fineCalc() {
         initComponents();
         jLabel6.setText(login.userName);
     }
@@ -42,6 +42,8 @@ public class logDetails extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -98,6 +100,11 @@ public class logDetails extends javax.swing.JFrame {
 
         jLabel6.setText("jLabel4");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/mayank/NetBeansProjects/LMS/images/searchSmall.png")); // NOI18N
+
+        jTextField1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jTextField1.setBorder(null);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -105,6 +112,10 @@ public class logDetails extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -121,7 +132,11 @@ public class logDetails extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -135,7 +150,7 @@ public class logDetails extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Re-Issue");
+        jButton1.setText("Fine");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -161,90 +176,95 @@ public class logDetails extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
-        int rows=model.getRowCount();
-        if (rows>0){
-            for(int i=0;i<rows;i++) {
-                model.removeRow(0); 
-            }
-        }
-        try{ 
-            Class.forName("java.sql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
-            Statement stmt = con.createStatement();
-            Statement stmt1=con.createStatement();
-            String query=null;
-            if(login.userType.equals("Student") || login.userType.equals("Teacher")){
-            
-                query = "select * from "+login.userType+" natural join borrowBook where ID='"+login.userID+"';";
-            }
-            else{
-                query = "select * from Student Natural join borrowBook Union All Select * from Teacher natural join borrowBook;";
-                
-            }
-            ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()) { 
-                String id = rs.getString("ID");
-                String name = rs.getString("Name");
-                int bookID = rs.getInt("book_id");
-                String da_te = rs.getString("borrow_date");
-                
-                model.addRow(new Object[]{id,name, bookID, da_te}); 
-            }
-            rs.close(); 
-            stmt.close(); 
-            con.close(); }
-
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        String userId=jTextField1.getText();
+        
+        int rows=model.getRowCount();
+        if (rows>0){
+            for(int i=0;i<rows;i++) {
+                model.removeRow(0);
+            }
+        }
+        try{
+            Class.forName("java.sql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
+            Statement stmt = con.createStatement();
+            //Statement stmt1=con.createStatement();
+            String query="select * from "
+                    + "(select * from borrowBook"
+                    + " where (book_id, ID) "
+                    + "NOT IN (select book_id, ID "
+                    + "from borrowBook natural join returnBook)) Z"
+                    + " natural join Student  where ID='"+userId+"';";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                String id = rs.getString("ID");
+                String name = rs.getString("Name");
+                int bookID = rs.getInt("book_id");
+                String da_te = rs.getString("borrow_date");
+                model.addRow(new Object[]{id,name, bookID, da_te});
+            }
+            rs.close();
+            stmt.close();
+            con.close(); }
+
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int i=jTable1.getSelectedRow();
-        int b_id= (int) jTable1.getValueAt(i, 2);
+        int b_id= (int)jTable1.getValueAt(i, 2);
         String id=(String) jTable1.getValueAt(i, 0);
-        
-        try{ 
+        System.out.println(b_id+","+id );
+        try{
             Class.forName("java.sql.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
             Statement stmt = con.createStatement();
             Statement stmt1=con.createStatement();
-            String sql="update borrowBook set borrow_date=DATE_ADD(borrow_date,INTERVAL 7 DAY) where ID='"+id+"' and book_id="+b_id+";";
-            int rs = stmt.executeUpdate(sql);
-            stmt.close(); 
+            String sql="select * from "
+                    + "(select *, greatest(0,(datediff(return_date,borrow_date)-7)*10) as penalty "
+                    + "from borrowBook natural join returnBook)Z "
+                    + "where book_id="+b_id+" and ID='"+id+"';";
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            int penalty=Integer.parseInt(rs.getString("penalty"));
+            JOptionPane.showMessageDialog(null,"You have "+penalty+" rs due");
+            
+            stmt.close();
             con.close(); }
 
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-        new Profile().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         new login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        new Profile().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
@@ -275,20 +295,20 @@ public class logDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fineCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fineCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fineCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fineCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new logDetails().setVisible(true);
+                new fineCalc().setVisible(true);
             }
         });
     }
@@ -296,6 +316,7 @@ public class logDetails extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -303,5 +324,6 @@ public class logDetails extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -225,6 +225,11 @@ public class login extends javax.swing.JFrame {
                 if(type.equals("Admin")){
                     userName="Admin";
                     userType="Admin";
+                    userID="%%";
+                    userAge="%%";
+                    userYearofAdm="%%";
+                    userBranch="%%";
+                    onlyName="mtg";
                     new Admin().setVisible(true);
                 }
                 else{

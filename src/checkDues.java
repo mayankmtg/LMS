@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author mayank
  */
-public class logDetails extends javax.swing.JFrame {
+public class checkDues extends javax.swing.JFrame {
 
     /**
-     * Creates new form logDetails
+     * Creates new form checkDues
      */
-    public logDetails() {
+    public checkDues() {
         initComponents();
         jLabel6.setText(login.userName);
     }
@@ -135,7 +135,7 @@ public class logDetails extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Re-Issue");
+        jButton1.setText("Check");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -146,13 +146,10 @@ public class logDetails extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,78 +158,30 @@ public class logDetails extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
-        int rows=model.getRowCount();
-        if (rows>0){
-            for(int i=0;i<rows;i++) {
-                model.removeRow(0); 
-            }
-        }
-        try{ 
-            Class.forName("java.sql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
-            Statement stmt = con.createStatement();
-            Statement stmt1=con.createStatement();
-            String query=null;
-            if(login.userType.equals("Student") || login.userType.equals("Teacher")){
-            
-                query = "select * from "+login.userType+" natural join borrowBook where ID='"+login.userID+"';";
-            }
-            else{
-                query = "select * from Student Natural join borrowBook Union All Select * from Teacher natural join borrowBook;";
-                
-            }
-            ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()) { 
-                String id = rs.getString("ID");
-                String name = rs.getString("Name");
-                int bookID = rs.getInt("book_id");
-                String da_te = rs.getString("borrow_date");
-                
-                model.addRow(new Object[]{id,name, bookID, da_te}); 
-            }
-            rs.close(); 
-            stmt.close(); 
-            con.close(); }
-
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int i=jTable1.getSelectedRow();
-        int b_id= (int) jTable1.getValueAt(i, 2);
-        String id=(String) jTable1.getValueAt(i, 0);
-        
-        try{ 
-            Class.forName("java.sql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
-            Statement stmt = con.createStatement();
-            Statement stmt1=con.createStatement();
-            String sql="update borrowBook set borrow_date=DATE_ADD(borrow_date,INTERVAL 7 DAY) where ID='"+id+"' and book_id="+b_id+";";
-            int rs = stmt.executeUpdate(sql);
-            stmt.close(); 
-            con.close(); }
-
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        if(login.userType.equals("Student")|| login.userType.equals("Teacher")){
+            new Student().setVisible(true);
+            this.setVisible(false);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        else{
+            new Admin().setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
@@ -246,17 +195,70 @@ public class logDetails extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        if(login.userType.equals("Student")|| login.userType.equals("Teacher")){
-            new Student().setVisible(true);
-            this.setVisible(false);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        String userId=login.userID;
+
+        int rows=model.getRowCount();
+        if (rows>0){
+            for(int i=0;i<rows;i++) {
+                model.removeRow(0);
+            }
         }
-        else{
-            new Admin().setVisible(true);
-            this.setVisible(false);
+        try{
+            Class.forName("java.sql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
+            Statement stmt = con.createStatement();
+            //Statement stmt1=con.createStatement();
+            String query="select * from "
+            + "(select * from borrowBook"
+            + " where (book_id, ID) "
+            + "NOT IN (select book_id, ID "
+            + "from borrowBook natural join returnBook)) Z"
+            + " natural join Student  where ID='"+userId+"';";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                String id = rs.getString("ID");
+                String name = rs.getString("Name");
+                int bookID = rs.getInt("book_id");
+                String da_te = rs.getString("borrow_date");
+                model.addRow(new Object[]{id,name, bookID, da_te});
+            }
+            rs.close();
+            stmt.close();
+            con.close(); }
+
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
         }
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int i=jTable1.getSelectedRow();
+        int b_id= (int)jTable1.getValueAt(i, 2);
+        String id=(String) jTable1.getValueAt(i, 0);
+        System.out.println(b_id+","+id );
+        try{
+            Class.forName("java.sql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
+            Statement stmt = con.createStatement();
+            Statement stmt1=con.createStatement();
+            String sql="select * from "
+            + "(select *, greatest(0,(datediff(return_date,borrow_date)-7)*10) as penalty "
+            + "from borrowBook natural join returnBook)Z "
+            + "where book_id="+b_id+" and ID='"+id+"';";
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            int penalty=Integer.parseInt(rs.getString("penalty"));
+            JOptionPane.showMessageDialog(null,"You have "+penalty+" rs due");
+
+            stmt.close();
+            con.close(); }
+
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,20 +277,20 @@ public class logDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(checkDues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(checkDues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(checkDues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(checkDues.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new logDetails().setVisible(true);
+                new checkDues().setVisible(true);
             }
         });
     }

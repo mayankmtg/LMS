@@ -16,14 +16,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author mayank
  */
-public class logDetails extends javax.swing.JFrame {
+public class rateBook extends javax.swing.JFrame {
 
     /**
-     * Creates new form logDetails
+     * Creates new form rateBook
      */
-    public logDetails() {
+    public rateBook() {
         initComponents();
-        jLabel6.setText(login.userName);
     }
 
     /**
@@ -35,8 +34,6 @@ public class logDetails extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -44,34 +41,10 @@ public class logDetails extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "book_id", "borrow_date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -135,24 +108,42 @@ public class logDetails extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Re-Issue");
+        jButton1.setText("Rate");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Author", "Publisher", "Branch", "NoOfCopies", "Rating", "NoOfTimesRated"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +153,9 @@ public class logDetails extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,62 +166,60 @@ public class logDetails extends javax.swing.JFrame {
         int rows=model.getRowCount();
         if (rows>0){
             for(int i=0;i<rows;i++) {
-                model.removeRow(0); 
+                model.removeRow(0);
             }
         }
-        try{ 
+        try{
             Class.forName("java.sql.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
             Statement stmt = con.createStatement();
             Statement stmt1=con.createStatement();
-            String query=null;
-            if(login.userType.equals("Student") || login.userType.equals("Teacher")){
-            
-                query = "select * from "+login.userType+" natural join borrowBook where ID='"+login.userID+"';";
-            }
-            else{
-                query = "select * from Student Natural join borrowBook Union All Select * from Teacher natural join borrowBook;";
-                
-            }
+            String query = "select * from books;";
             ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()) { 
-                String id = rs.getString("ID");
-                String name = rs.getString("Name");
-                int bookID = rs.getInt("book_id");
-                String da_te = rs.getString("borrow_date");
-                
-                model.addRow(new Object[]{id,name, bookID, da_te}); 
+            while(rs.next()) {
+                String id = rs.getString("book_id");
+                String b_name = rs.getString("Name");
+                String author = rs.getString("Author");
+                String publisher = rs.getString("Publisher");
+                String branch = rs.getString("Branch");
+                String noc = rs.getString("No_of_copies");
+                String rate = rs.getString("Rating");
+                String notr = rs.getString("No_of_times_rated");
+                model.addRow(new Object[]{id,b_name, author, publisher,branch, noc, rate, notr}); 
             }
-            rs.close(); 
-            stmt.close(); 
+            rs.close();
+            stmt.close();
             con.close(); }
 
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int i=jTable1.getSelectedRow();
-        int b_id= (int) jTable1.getValueAt(i, 2);
-        String id=(String) jTable1.getValueAt(i, 0);
+        String b_id= (String) jTable1.getValueAt(i, 0);
+        int a=Integer.parseInt(JOptionPane.showInputDialog(null,"Rate: 1-5"));
         
-        try{ 
+        try{
             Class.forName("java.sql.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
             Statement stmt = con.createStatement();
-            Statement stmt1=con.createStatement();
-            String sql="update borrowBook set borrow_date=DATE_ADD(borrow_date,INTERVAL 7 DAY) where ID='"+id+"' and book_id="+b_id+";";
-            int rs = stmt.executeUpdate(sql);
-            stmt.close(); 
+            String sql2="select Rating,No_of_times_rated from books where book_id="+b_id+";";
+            ResultSet rs = stmt.executeQuery(sql2);
+            rs.next();
+            float newRating=Float.parseFloat(rs.getString("Rating"))*Float.parseFloat(rs.getString("No_of_times_rated"))+(float)a;
+            System.out.println(""+newRating);
+            newRating=newRating/(Integer.parseInt(rs.getString("No_of_times_rated"))+1);
+            
+            String sql="update books set Rating="+newRating+", No_of_times_rated="+(Integer.parseInt(rs.getString("No_of_times_rated"))+1)+" where book_id="+b_id+";";
+            int rs1 = stmt.executeUpdate(sql);
+            rs.close();
+            stmt.close();
             con.close(); }
 
-        catch(Exception e){ 
-            JOptionPane.showMessageDialog(null,"Error in connectivity"); 
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error in connectivity");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -275,20 +264,20 @@ public class logDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(rateBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(rateBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(rateBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(logDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(rateBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new logDetails().setVisible(true);
+                new rateBook().setVisible(true);
             }
         });
     }
