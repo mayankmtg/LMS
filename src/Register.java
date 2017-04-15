@@ -52,6 +52,12 @@ public class Register extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +95,7 @@ public class Register extends javax.swing.JFrame {
                 jTextField4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 250, -1));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 250, -1));
 
         jTextField5.setBackground(new java.awt.Color(38, 38, 38));
         jTextField5.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
@@ -120,7 +126,7 @@ public class Register extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 250, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 250, 30));
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(89, 89, 89));
@@ -129,8 +135,8 @@ public class Register extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(89, 89, 89));
-        jLabel2.setText("Age");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        jLabel2.setText("Password");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(89, 89, 89));
@@ -175,6 +181,46 @@ public class Register extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 30));
 
+        jTextField7.setBackground(new java.awt.Color(38, 38, 38));
+        jTextField7.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField7.setBorder(null);
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 250, -1));
+
+        jLabel7.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(89, 89, 89));
+        jLabel7.setText("Age");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+
+        jComboBox1.setBackground(new java.awt.Color(38, 38, 38));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Teacher" }));
+        jComboBox1.setBorder(null);
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 250, -1));
+
+        jLabel8.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(89, 89, 89));
+        jLabel8.setText("Type");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        jTextField8.setBackground(new java.awt.Color(38, 38, 38));
+        jTextField8.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField8.setBorder(null);
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 250, -1));
+
+        jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 251, 27));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,9 +229,7 @@ public class Register extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
         );
 
         pack();
@@ -204,11 +248,13 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
      {
-         String name=jTextField4.getText();
+         String name=jTextField7.getText();
+         String id=jTextField4.getText();
          int date=Integer.parseInt(jTextField6.getText());
          String branch=jTextField3.getText();
          int age=Integer.parseInt(jTextField5.getText());
-         
+         String type=jComboBox1.getSelectedItem().toString();
+         String pass=jTextField8.getText();
          Class.forName("com.mysql.jdbc.Driver");
          Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
          Statement stmt=con.createStatement();
@@ -216,16 +262,18 @@ public class Register extends javax.swing.JFrame {
          //String name="Jerome Dcruz";
          //String contactno="9773523568";
          String insert=new String();
-         insert="INSERT INTO students VALUES(null,'"+ name +"',"+date+",'"+branch+"',"+age+");";
+         insert="INSERT INTO "+type+" VALUES('"+id+"','"+ name +"',"+date+",'"+branch+"',"+age+");";
+         String u_name=name + id.toString();
+         String insert2="insert into login values('"+u_name+"', '"+pass+"', '"+type+"')";
          stmt.executeUpdate(insert);
+         stmt.executeUpdate(insert2);
          JOptionPane.showMessageDialog(null, "Done" ,"Success", 1);
-
-
+         new login().setVisible(true);
+         this.setVisible(false);
      }
      catch(Exception e)
      {
          JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
-
      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -236,6 +284,14 @@ public class Register extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,12 +330,15 @@ public class Register extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -287,9 +346,12 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }

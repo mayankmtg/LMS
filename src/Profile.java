@@ -15,6 +15,16 @@ public class Profile extends javax.swing.JFrame {
      */
     public Profile() {
         initComponents();
+        jLabel4.setText(login.userName);
+        jLabel5.setText(login.userType);
+        jLabel11.setText(login.onlyName);
+        jLabel12.setText(login.userID);
+        jLabel13.setText(login.userType);
+        jLabel14.setText(login.userBranch);
+        jLabel20.setText(login.userYearofAdm);
+        jLabel21.setText(login.userAge);
+        
+        
     }
 
     /**
@@ -64,6 +74,11 @@ public class Profile extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setIcon(new javax.swing.ImageIcon("/home/mayank/NetBeansProjects/LMS/images/logout.png")); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 40, 40));
 
         jLabel17.setIcon(new javax.swing.ImageIcon("/home/mayank/NetBeansProjects/LMS/images/back.png")); // NOI18N
@@ -79,7 +94,7 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel8.setText("Lib_Id");
+        jLabel8.setText("ID");
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
@@ -279,6 +294,11 @@ public class Profile extends javax.swing.JFrame {
         new logDetails().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        this.setVisible(false);
+        new login().setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments

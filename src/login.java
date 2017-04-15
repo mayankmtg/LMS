@@ -21,9 +21,21 @@ public class login extends javax.swing.JFrame {
      * Creates new form login
      */
     static String userName;
-    static String Type;
+    static String onlyName;
+    static String userType;
+    static String userID;
+    static String userAge;
+    static String userYearofAdm;
+    static String userBranch;
+    
     
     public login() {
+        userName=null;
+        userType=null;
+        userID=null;
+        userAge=null;
+        userYearofAdm=null;
+        userBranch=null;
         initComponents();
     }
 
@@ -189,32 +201,60 @@ public class login extends javax.swing.JFrame {
         String uName=new String(jTextField2.getText());
         String pWord=new String(jPasswordField1.getPassword());
         ResultSet rs=null; 
+        ResultSet rs2=null; 
+       // System.out.println(pWord);
         String g;
 
         try{ 
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","mayank");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/lms","root","abc");
+            
             Statement stmt=con.createStatement();
-            String sql="select password from login where userName='"+uName+"';";
-            rs=stmt.executeQuery(sql); rs.next();
-            String Pword=rs.getString("Password");
-            rs.close(); stmt.close(); con.close();
-            if(p.equals(Pword)){
-                g=jOptionPane1.showInputDialog(null,"Enter The Greatness Code");
-                String h;
-                h=g.toLowerCase();
-                if (h.equals("mayankthegreat")) {
-                    tryform t= new tryform();
-                    t.setVisible(true);
-                    this.setVisible(false);
-                } 
+            String sql="select * from login where userName='"+uName+"';";
+            rs=stmt.executeQuery(sql); 
+            rs.next();
+            String Pword=rs.getString("password");
+            String type=rs.getString("Type");
+            
+            
+            
+            //System.out.println(Pword);
+            rs.close();
+            if(pWord.equals(Pword)){
+                //String type=rs.getString("Type");
+                if(type.equals("Admin")){
+                    userName="Admin";
+                    userType="Admin";
+                    new Admin().setVisible(true);
+                }
+                else{
+                    String sql2="select * from "+type+" where concat(Name,ID)='"+uName+"';";
+                    rs2=stmt.executeQuery(sql2);
+                    rs2.next();
+                    userName=uName;
+                    userType=type;
+                    onlyName=rs2.getString("Name");
+                    userID=rs2.getString("ID");
+                    userAge=rs2.getString("Age");
+                    userYearofAdm=rs2.getString("YearOfAdmission");
+                    userBranch=rs2.getString("Branch");
+                    rs2.close();
+                    new Student().setVisible(true);
+                }
+                
+                this.setVisible(false);
             }
             else{
-                JOptionPane.showMessageDialog(null,"Invalid User");
+                JOptionPane.showMessageDialog(null,"Invalid Password");
             }
+            stmt.close();
+            con.close();
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null,"error in connectivity"); 
+            JOptionPane.showMessageDialog(null,"Invalid Username or Password"); 
+        }
+        finally{
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
